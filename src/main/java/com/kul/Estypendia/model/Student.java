@@ -1,6 +1,7 @@
 package com.kul.Estypendia.model;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class Student {
@@ -129,4 +130,5 @@ public class Student {
 //    public void setActualAddress(Address actualAddress) {
 //        this.actualAddress = actualAddress;
 //    }
+
 }
