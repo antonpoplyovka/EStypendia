@@ -1,30 +1,36 @@
 package service;
 
+import com.kul.Estypendia.model.PaymentsLog;
 import com.kul.Estypendia.model.Student;
+import com.kul.Estypendia.repository.PaymentsLogRepo;
 import com.kul.Estypendia.repository.StudentRepo;
-import com.kul.Estypendia.controller.StudentController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class ReportService {
     private final StudentRepo studentRepo;
+    private final PaymentsLogRepo paymentsLogRepo;
 
     @Autowired
-    public ReportService(@Qualifier("postgres") StudentRepo studentRepo) {
+    public ReportService(StudentRepo studentRepo, PaymentsLogRepo paymentsLogRepo) {
         this.studentRepo = studentRepo;
+        this.paymentsLogRepo = paymentsLogRepo;
     }
 
-    public int addStudent(Student student){
-        return studentRepo.insertStudent(student);
+    public String studentReport (Integer studentId) {
+        Optional<Student>  student = studentRepo.findById(studentId);
+        List<PaymentsLog> paymentsLogList = paymentsLogRepo.findAllByStudentId(studentId)
+        String surname = "";
+        if(student.isPresent()){
+            surname = student.get().getSurname();
+        }
+        for (PaymentsLog paymentsLog: paymentsLogList) {
+            System.out.println(surname + "/" + paymentsLog.getPaymentAmount()+ "/" + paymentsLog.getPaymentDate());
+        }
+        return "";
     }
 
-    public List<Student> getAllPeople(){
-        return studentRepo.selectAllStudent();
-
-}
 
 }
