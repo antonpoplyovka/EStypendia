@@ -1,6 +1,7 @@
 package service;
 
 import com.kul.Estypendia.controller.DTO.AdminReportDTO;
+import com.kul.Estypendia.controller.DTO.AdminReportDTORecord;
 import com.kul.Estypendia.controller.DTO.StudentReportDTO;
 import com.kul.Estypendia.controller.DTO.StudentReportDTORecord;
 import com.kul.Estypendia.model.PaymentsLog;
@@ -26,26 +27,27 @@ public class ReportService {
         this.typeOfHousingRepo = typeOfHousingRepo;
     }
 
-    public StudentReportDTO studentReport (Integer studentId) {
+    public StudentReportDTO studentReport(Integer studentId) {
         List<StudentReportDTORecord> studentReportDTORecords = new ArrayList<>();
         Optional<Student> student = studentRepo.findById(studentId);
         List<PaymentsLog> paymentsLogList = paymentsLogRepo.findAllByStudentId(studentId);
         if (student.isPresent())
             for (PaymentsLog paymentsLog : paymentsLogList) {
-                StudentReportDTORecord studentReportDTORecord = new StudentReportDTORecord(paymentsLog.getPaymentAmount(),paymentsLog.getPaymentDate());
+                StudentReportDTORecord studentReportDTORecord = new StudentReportDTORecord(paymentsLog.getPaymentAmount(), paymentsLog.getPaymentDate());
                 studentReportDTORecords.add(studentReportDTORecord);
             }
         return new StudentReportDTO(studentReportDTORecords);
     }
 
 
-     public void adminReport() {
+    public AdminReportDTO adminReport() {
+        List<AdminReportDTORecord> adminReportDTORecords = new ArrayList<>();
         List<Student> studentsList = studentRepo.findAll();
-
-         for(Student student: studentsList ){
-             int monthlyPayment = student.getTypeOfStudent().getMonthlyPayment() - student.getAddressType().getCost();
-             System.out.println(student.getSurname() + "/" + monthlyPayment );
-         }
-
+        for (Student student : studentsList) {
+            int monthlyPayment = student.getTypeOfStudent().getMonthlyPayment() - student.getAddressType().getCost();
+            AdminReportDTORecord adminReportDTORecord = new AdminReportDTORecord(student.getSurname(), monthlyPayment);
+            adminReportDTORecords.add(adminReportDTORecord);
+        }
+        return new AdminReportDTO(adminReportDTORecords);
     }
 }
