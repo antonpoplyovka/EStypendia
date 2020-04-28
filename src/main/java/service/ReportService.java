@@ -1,5 +1,8 @@
 package service;
 
+import com.kul.Estypendia.controller.DTO.AdminReportDTO;
+import com.kul.Estypendia.controller.DTO.StudentReportDTO;
+import com.kul.Estypendia.controller.DTO.StudentReportDTORecord;
 import com.kul.Estypendia.model.PaymentsLog;
 import com.kul.Estypendia.model.Student;
 import com.kul.Estypendia.repository.PaymentsLogRepo;
@@ -7,6 +10,7 @@ import com.kul.Estypendia.repository.StudentRepo;
 import com.kul.Estypendia.repository.TypeOfHousingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,18 +26,18 @@ public class ReportService {
         this.typeOfHousingRepo = typeOfHousingRepo;
     }
 
-    public String studentReport (Integer studentId) {
-        Optional<Student>  student = studentRepo.findById(studentId);
-        List<PaymentsLog> paymentsLogList = paymentsLogRepo.findAllByStudentId(studentId)
-        String surname = "";
-        if(student.isPresent()){
-            surname = student.get().getSurname();
-        }
-        for (PaymentsLog paymentsLog: paymentsLogList) {
-            System.out.println(surname + "/" + paymentsLog.getPaymentAmount()+ "/" + paymentsLog.getPaymentDate());
-        }
-        return "";
+    public StudentReportDTO studentReport (Integer studentId) {
+        List<StudentReportDTORecord> studentReportDTORecords = new ArrayList<>();
+        Optional<Student> student = studentRepo.findById(studentId);
+        List<PaymentsLog> paymentsLogList = paymentsLogRepo.findAllByStudentId(studentId);
+        if (student.isPresent())
+            for (PaymentsLog paymentsLog : paymentsLogList) {
+                StudentReportDTORecord studentReportDTORecord = new StudentReportDTORecord(paymentsLog.getPaymentAmount(),paymentsLog.getPaymentDate());
+                studentReportDTORecords.add(studentReportDTORecord);
+            }
+        return new StudentReportDTO(studentReportDTORecords);
     }
+
 
      public void adminReport() {
         List<Student> studentsList = studentRepo.findAll();
