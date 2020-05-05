@@ -1,10 +1,12 @@
 package com.kul.Estypendia.controller;
 
 import com.kul.Estypendia.controller.DTO.AdminReportDTORecord;
+import com.kul.Estypendia.controller.DTO.StudentReportDTORecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.kul.Estypendia.service.ReportService;
@@ -31,15 +33,10 @@ public class ReportController {
     public List<AdminReportDTORecord> getAdminReport() {
         return reportService.adminReport();
     }
-//    @ApiOperation(value = "Get Student report")
-//    @GetMapping("/student")
-//    public StudentReportDTO getStudentReport() {
-//        return reportService.adminReport();
-//    }
-//
-//    @ApiOperation(value = "Get student by Id")
-//    @GetMapping("/student/{studentId}")
-//    public Optional<Student> getStudentById(@PathVariable Integer studentId) {
-//        return studentRepo.findById(studentId);
-//    }
+    @ApiOperation(value = "Get Student report")
+    @GetMapping("/student/{studentId}")
+    public List<StudentReportDTORecord> getStudentReport(@PathVariable Integer studentId) {
+        return reportService.studentReport(studentId);
+    }
+
 }
