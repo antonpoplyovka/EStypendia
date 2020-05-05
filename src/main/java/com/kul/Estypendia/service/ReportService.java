@@ -1,8 +1,6 @@
-package service;
+package com.kul.Estypendia.service;
 
-import com.kul.Estypendia.controller.DTO.AdminReportDTO;
 import com.kul.Estypendia.controller.DTO.AdminReportDTORecord;
-import com.kul.Estypendia.controller.DTO.StudentReportDTO;
 import com.kul.Estypendia.controller.DTO.StudentReportDTORecord;
 import com.kul.Estypendia.model.PaymentsLog;
 import com.kul.Estypendia.model.Student;
@@ -10,11 +8,12 @@ import com.kul.Estypendia.repository.PaymentsLogRepo;
 import com.kul.Estypendia.repository.StudentRepo;
 import com.kul.Estypendia.repository.TypeOfHousingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ReportService {
     private final StudentRepo studentRepo;
     private final PaymentsLogRepo paymentsLogRepo;
@@ -27,7 +26,7 @@ public class ReportService {
         this.typeOfHousingRepo = typeOfHousingRepo;
     }
 
-    public StudentReportDTO studentReport(Integer studentId) {
+    public List<StudentReportDTORecord> studentReport(Integer studentId) {
         List<StudentReportDTORecord> studentReportDTORecords = new ArrayList<>();
         Optional<Student> student = studentRepo.findById(studentId);
         List<PaymentsLog> paymentsLogList = paymentsLogRepo.findAllByStudentId(studentId);
@@ -36,18 +35,18 @@ public class ReportService {
                 StudentReportDTORecord studentReportDTORecord = new StudentReportDTORecord(paymentsLog.getPaymentAmount(), paymentsLog.getPaymentDate());
                 studentReportDTORecords.add(studentReportDTORecord);
             }
-        return new StudentReportDTO(studentReportDTORecords);
+        return  studentReportDTORecords;
     }
 
 
-    public AdminReportDTO adminReport() {
+    public List<AdminReportDTORecord> adminReport() {
         List<AdminReportDTORecord> adminReportDTORecords = new ArrayList<>();
         List<Student> studentsList = studentRepo.findAll();
         for (Student student : studentsList) {
             int monthlyPayment = student.getTypeOfStudent().getMonthlyPayment() - student.getAddressType().getCost();
-            AdminReportDTORecord adminReportDTORecord = new AdminReportDTORecord(student.getSurname(), monthlyPayment);
+            AdminReportDTORecord adminReportDTORecord = new AdminReportDTORecord(student.getSurname(),student.getName(), monthlyPayment);
             adminReportDTORecords.add(adminReportDTORecord);
         }
-        return new AdminReportDTO(adminReportDTORecords);
+        return adminReportDTORecords;
     }
 }

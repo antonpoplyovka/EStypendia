@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface TypeOfHousingRepo extends JpaRepository<TypeOfHousing, Integer> {
-    List<MonthlyPayment> findAllByStudentId(Integer studentId);
 }

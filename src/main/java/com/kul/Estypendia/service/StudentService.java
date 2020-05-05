@@ -1,13 +1,14 @@
-package service;
+package com.kul.Estypendia.service;
 
 import com.kul.Estypendia.model.Student;
 import com.kul.Estypendia.repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-
+@Service
 public class StudentService {
     private StudentRepo studentRepo;
 
