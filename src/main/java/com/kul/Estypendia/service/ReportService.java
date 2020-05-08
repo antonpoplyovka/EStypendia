@@ -7,6 +7,7 @@ import com.kul.Estypendia.model.Student;
 import com.kul.Estypendia.repository.PaymentsLogRepo;
 import com.kul.Estypendia.repository.StudentRepo;
 import com.kul.Estypendia.repository.TypeOfHousingRepo;
+import com.kul.Estypendia.repository.TypeOfStudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -18,12 +19,14 @@ public class ReportService {
     private final StudentRepo studentRepo;
     private final PaymentsLogRepo paymentsLogRepo;
     private final TypeOfHousingRepo typeOfHousingRepo;
+    private final TypeOfStudentRepo typeOfStudentRepo;
 
     @Autowired
-    public ReportService(StudentRepo studentRepo, PaymentsLogRepo paymentsLogRepo, TypeOfHousingRepo typeOfHousingRepo) {
+    public ReportService(StudentRepo studentRepo, PaymentsLogRepo paymentsLogRepo, TypeOfHousingRepo typeOfHousingRepo, TypeOfStudentRepo typeOfStudentRepo) {
         this.studentRepo = studentRepo;
         this.paymentsLogRepo = paymentsLogRepo;
         this.typeOfHousingRepo = typeOfHousingRepo;
+        this.typeOfStudentRepo = typeOfStudentRepo;
     }
 
     public List<StudentReportDTORecord> studentReport(Integer studentId) {
@@ -43,7 +46,7 @@ public class ReportService {
         List<AdminReportDTORecord> adminReportDTORecords = new ArrayList<>();
         List<Student> studentsList = studentRepo.findAll();
         for (Student student : studentsList) {
-            int monthlyPayment = student.getTypeOfStudent().getMonthlyPayment() - student.getAddressType().getCost();
+            int monthlyPayment = typeOfStudentRepo.findById(student.getTypeOfStudent()).get().getMonthlyPayment() - typeOfHousingRepo.findById(student.getAddressType()).get().getCost();
             AdminReportDTORecord adminReportDTORecord = new AdminReportDTORecord(student.getSurname(),student.getName(), monthlyPayment);
             adminReportDTORecords.add(adminReportDTORecord);
         }

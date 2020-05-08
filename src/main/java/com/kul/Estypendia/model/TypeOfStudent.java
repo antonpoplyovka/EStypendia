@@ -1,7 +1,6 @@
 package com.kul.Estypendia.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity (name = "type_of_student")
 public class TypeOfStudent {
@@ -13,11 +12,7 @@ public class TypeOfStudent {
     @Column(name = "description", nullable = false, length = 255)
     private String description;
 
-    @OneToMany
-    @JoinColumn(name = "type_of_student")
-    private List<Student> students;
-
-    public TypeOfStudent() {
+     public TypeOfStudent() {
     }
 
     public Integer getMonthlyPayment() {

@@ -7,5 +7,6 @@
 ">
 
     <include file="db/changelog/changes/dataBaseStructure.sql"/>
+    <include file="db/changelog/changes/initData.sql"/>
 
 </databaseChangeLog>

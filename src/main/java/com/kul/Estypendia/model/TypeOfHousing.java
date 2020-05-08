@@ -1,7 +1,6 @@
 package com.kul.Estypendia.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity (name = "type_of_housing")
 public class TypeOfHousing {
@@ -15,9 +14,7 @@ public class TypeOfHousing {
 
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn (name = "address_type")
-    private List<Student> students;
+
 
     public TypeOfHousing() {
     }

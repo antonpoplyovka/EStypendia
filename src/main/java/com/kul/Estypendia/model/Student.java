@@ -1,7 +1,6 @@
 package com.kul.Estypendia.model;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 public class Student {
@@ -33,13 +32,14 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "id",  insertable = false, updatable = false)
     private Address actualAddress;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private TypeOfHousing addressType;
+    @Column(name = "address_type", nullable = false, length = 50)
+
+    private Integer addressType;
 
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private TypeOfStudent typeOfStudent;
+    @Column(name = "type_of_Student", nullable = false, length = 50)
+    private Integer typeOfStudent;
 
     public Student() {
     }
@@ -99,22 +99,22 @@ public class Student {
     public void setNationalityOfBirth(String nationalityOfBirth) {
         this.nationalityOfBirth = nationalityOfBirth;
     }
-    public TypeOfHousing getAddressType() {
+
+    public Integer getAddressType() {
         return addressType;
     }
 
-    public void setAddressType(TypeOfHousing addressType) {
+    public void setAddressType(Integer addressType) {
         this.addressType = addressType;
     }
 
-    public TypeOfStudent getTypeOfStudent() {
+    public Integer getTypeOfStudent() {
         return typeOfStudent;
     }
 
-    public void setTypeOfStudent(TypeOfStudent typeOfStudent) {
+    public void setTypeOfStudent(Integer typeOfStudent) {
         this.typeOfStudent = typeOfStudent;
     }
-
 //    public Address getAddressOfResidence() {
 //        return addressOfResidence;
 //    }
