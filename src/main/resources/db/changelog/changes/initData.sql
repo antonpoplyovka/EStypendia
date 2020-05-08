@@ -31,10 +31,11 @@ INSERT into type_of_housing (cost, description)
 values (1, 'Stancja');
 
 INSERT into student (name, surname, father_name, place_of_birth, country_of_birth, nationality,
-                     nationality_of_birth, address_of_residence, actual_address, address_type, type_of_student,
-                     address_type_id, type_of_student_id)
-values ('Adam', 'Nowak', 'Jan', 'Lublin', 'Polska', 'Polak', 'Polak',1,1,1,1,1,1);
+                     nationality_of_birth, address_of_residence, actual_address, address_type, type_of_student)
+values ('Adam', 'Nowak', 'Jan', 'Lublin', 'Polska', 'Polak', 'Polak',1,1,1,1);
 INSERT into student (name, surname, father_name, place_of_birth, country_of_birth, nationality,
-                     nationality_of_birth, address_of_residence, actual_address, address_type, type_of_student,
-                     address_type_id, type_of_student_id)
-values ('Jan', 'Kowalski', 'Adam', 'London', 'UK', 'Polak', 'UK',1,3,2,2,1,1);
+                     nationality_of_birth, address_of_residence, actual_address, address_type, type_of_student)
+values ('Jan', 'Kowalski', 'Adam', 'London', 'UK', 'Polak', 'UK',1,3,2,2);
+INSERT into student (name, surname, father_name, place_of_birth, country_of_birth, nationality,
+                     nationality_of_birth, address_of_residence, actual_address, address_type, type_of_student)
+values ('Bin', 'Tomczyk', 'Jerzy', 'Warszawa', 'Polska', 'Polak', 'Polak',1,3,2,2);
