@@ -2,7 +2,7 @@ package com.kul.Estypendia.model;
 
 import javax.persistence.*;
 import java.math.BigInteger;
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity(name = "payments_log")
 public class PaymentsLog {
@@ -14,7 +14,7 @@ public class PaymentsLog {
     @Column(name = "payout_amount", nullable = false)
     private Integer paymentAmount;
     @Column(name = "payment_date", nullable = false)
-    private Instant paymentDate;
+    private LocalDate paymentDate;
 
     public PaymentsLog() {
     }
@@ -35,11 +35,11 @@ public class PaymentsLog {
         this.paymentAmount = paymentAmount;
     }
 
-    public Instant getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Instant paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 }

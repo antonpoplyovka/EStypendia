@@ -15,6 +15,11 @@ public class TypeOfStudent {
      public TypeOfStudent() {
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+
     public Integer getMonthlyPayment() {
         return monthlyPayment;
     }

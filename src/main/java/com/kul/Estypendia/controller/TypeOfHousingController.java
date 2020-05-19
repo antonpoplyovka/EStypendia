@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
-@Api("Type of housing  reports")
+@Api("Type of housing ")
 @RestController
 @RequestMapping(value = "api/v1/typeOfHousing")
 public class TypeOfHousingController {

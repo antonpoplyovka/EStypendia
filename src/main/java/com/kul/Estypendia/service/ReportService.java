@@ -10,6 +10,8 @@ import com.kul.Estypendia.repository.TypeOfHousingRepo;
 import com.kul.Estypendia.repository.TypeOfStudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,9 +31,9 @@ public class ReportService {
         this.typeOfStudentRepo = typeOfStudentRepo;
     }
 
-    public List<StudentReportDTORecord> studentReport(Integer studentId) {
+    public List<StudentReportDTORecord> studentReport(BigInteger studentId) {
         List<StudentReportDTORecord> studentReportDTORecords = new ArrayList<>();
-        Optional<Student> student = studentRepo.findById(studentId);
+        Optional<Student> student = studentRepo.findById(studentId.intValue());
         List<PaymentsLog> paymentsLogList = paymentsLogRepo.findAllByStudentId(studentId);
         if (student.isPresent())
             for (PaymentsLog paymentsLog : paymentsLogList) {

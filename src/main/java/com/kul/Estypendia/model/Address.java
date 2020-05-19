@@ -1,7 +1,6 @@
 package com.kul.Estypendia.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity(name = "address")
 public class Address {
@@ -10,8 +9,6 @@ public class Address {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "student_id", nullable = false)
-    private Integer studentId;
 
 
     private boolean actualAddress;
@@ -37,15 +34,20 @@ public class Address {
 
 
 
-    @OneToMany
-    private List<Student> studentsAddressResidence;
-    @OneToMany
-    private List<Student> studentsAddressActual;
+
 
 
 
 
     public Address() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public boolean isActualAddress() {
@@ -129,11 +131,5 @@ public class Address {
     }
 
 
-    public Integer getStudentId() {
-        return studentId;
-    }
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
 
 }

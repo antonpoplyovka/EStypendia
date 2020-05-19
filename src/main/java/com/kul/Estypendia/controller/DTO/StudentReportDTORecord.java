@@ -1,25 +1,30 @@
 package com.kul.Estypendia.controller.DTO;
 
-import java.time.Instant;
+
+import java.time.LocalDate;
 
 public class StudentReportDTORecord {
     private Integer paymentAmount;
-    private Instant paymentDate;
+    private String paymentDate;
 
-    public StudentReportDTORecord( Integer paymentAmount, Instant paymentDate) {
+    public StudentReportDTORecord( Integer paymentAmount, LocalDate paymentDate) {
         this.paymentAmount = paymentAmount;
-        this.paymentDate = paymentDate;
+        this.paymentDate = paymentDate.toString();
     }
 
     public void setPaymentAmount(Integer paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
 
-    public Instant getPaymentDate() {
+    public Integer getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public String getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Instant paymentDate) {
+    public void setPaymentDate(String paymentDate) {
         this.paymentDate = paymentDate;
     }
 }

@@ -16,6 +16,7 @@ import java.util.Optional;
 @Api("Controller for address management")
 @RestController
 @RequestMapping(value = "api/v1/students")
+
 public class StudentController {
     private StudentRepo studentRepo;
     private StudentService studentService;

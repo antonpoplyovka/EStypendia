@@ -19,6 +19,10 @@ public class TypeOfHousing {
     public TypeOfHousing() {
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public Integer getCost() {
         return cost;
     }

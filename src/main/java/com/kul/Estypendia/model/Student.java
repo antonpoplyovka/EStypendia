@@ -26,19 +26,16 @@ public class Student {
 
 
 
-    @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
-    private Address addressOfResidence;
-    @ManyToOne
-    @JoinColumn(name = "id",  insertable = false, updatable = false)
-    private Address actualAddress;
-    @Column(name = "address_type", nullable = false, length = 50)
 
+    private Integer addressOfResidence;
+
+    private Integer actualAddress;
     private Integer addressType;
 
+    public Integer getId() {
+        return id;
+    }
 
-
-    @Column(name = "type_of_Student", nullable = false, length = 50)
     private Integer typeOfStudent;
 
     public Student() {
@@ -99,7 +96,6 @@ public class Student {
     public void setNationalityOfBirth(String nationalityOfBirth) {
         this.nationalityOfBirth = nationalityOfBirth;
     }
-
     public Integer getAddressType() {
         return addressType;
     }
@@ -115,7 +111,23 @@ public class Student {
     public void setTypeOfStudent(Integer typeOfStudent) {
         this.typeOfStudent = typeOfStudent;
     }
-//    public Address getAddressOfResidence() {
+
+    public Integer getAddressOfResidence() {
+        return addressOfResidence;
+    }
+
+    public void setAddressOfResidence(Integer addressOfResidence) {
+        this.addressOfResidence = addressOfResidence;
+    }
+
+    public Integer getActualAddress() {
+        return actualAddress;
+    }
+
+    public void setActualAddress(Integer actualAddress) {
+        this.actualAddress = actualAddress;
+    }
+    //    public Address getAddressOfResidence() {
 //        return addressOfResidence;
 //    }
 //

@@ -1,17 +1,18 @@
 package com.kul.Estypendia.controller;
 
-import com.kul.Estypendia.model.TypeOfHousing;
 import com.kul.Estypendia.model.TypeOfStudent;
-import com.kul.Estypendia.repository.TypeOfHousingRepo;
 import com.kul.Estypendia.repository.TypeOfStudentRepo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@Api("Type of student ")
+@RestController
+@RequestMapping(value = "api/v1/typeOfStudent")
 public class TypeOfStudentController {
     private TypeOfStudentRepo typeOfStudentRepo;
     @Autowired
@@ -29,5 +30,10 @@ public class TypeOfStudentController {
     @GetMapping("/{id}")
     public Optional<TypeOfStudent> getTypeOfStudentById(@PathVariable Integer id) {
         return typeOfStudentRepo.findById(id);
+    }
+    @ApiOperation(value = "Add new Student Type")
+    @PostMapping("/")
+    public TypeOfStudent createNewStudentType(@RequestBody TypeOfStudent typeOfStudent) {
+        return typeOfStudentRepo.save(typeOfStudent);
     }
 }

@@ -1,13 +1,13 @@
 
-INSERT into address (student_id, actual_address, code, street, district, voivodeship, city, country, phone,
+INSERT into address (actual_address, code, street, district, voivodeship, city, country, phone,
                      house_number, flat_number)
-VALUES (1, true, '20-043', 'Al.Racławickie', 'Lublin', 'Lubelskie', 'Lublin', 'Polska','+48514312458','5',null);
-INSERT into address (student_id, actual_address, code, street, district, voivodeship, city, country, phone,
+VALUES (true, '20-043', 'Al.Racławickie', 'Lublin', 'Lubelskie', 'Lublin', 'Polska','+48514312458','5',null);
+INSERT into address (actual_address, code, street, district, voivodeship, city, country, phone,
                      house_number, flat_number)
-VALUES (1, false, '20-043', 'ul.Lubomelska', 'Lublin', 'Lubelskie', 'Lublin', 'Polska','+48514312458','3','2');
-INSERT into address (student_id, actual_address, code, street, district, voivodeship, city, country, phone,
+VALUES (false, '20-043', 'ul.Lubomelska', 'Lublin', 'Lubelskie', 'Lublin', 'Polska','+48514312458','3','2');
+INSERT into address (actual_address, code, street, district, voivodeship, city, country, phone,
                      house_number, flat_number)
-VALUES (2, true, 'SW1-A11', 'Downing St.', '-', '-', 'London', 'UK','+443121212458','1',null);
+VALUES (true, 'SW1-A11', 'Downing St.', '-', '-', 'London', 'UK','+443121212458','1',null);
 
 
 
@@ -39,3 +39,17 @@ values ('Jan', 'Kowalski', 'Adam', 'London', 'UK', 'Polak', 'UK',1,3,2,2);
 INSERT into student (name, surname, father_name, place_of_birth, country_of_birth, nationality,
                      nationality_of_birth, address_of_residence, actual_address, address_type, type_of_student)
 values ('Bin', 'Tomczyk', 'Jerzy', 'Warszawa', 'Polska', 'Polak', 'Polak',1,3,2,2);
+
+insert into payments_log (student_id, payout_amount, payment_date) VALUES
+(1,256,'2020-03-25');
+insert into payments_log (student_id, payout_amount, payment_date) VALUES
+(1,5000,'2020-04-25');
+insert into payments_log (student_id, payout_amount, payment_date) VALUES
+(1,675,'2020-04-25');
+insert into payments_log (student_id, payout_amount, payment_date) VALUES
+(1,201,'2020-05-23');
+
+insert into payments_log (student_id, payout_amount, payment_date) VALUES
+(2,256,'2020-01-05');
+insert into payments_log (student_id, payout_amount, payment_date) VALUES
+(2,5000,'2020-02-03');

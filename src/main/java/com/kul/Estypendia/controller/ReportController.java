@@ -14,6 +14,7 @@ import com.kul.Estypendia.service.ReportService;
 import com.kul.Estypendia.service.StudentService;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
 
 @Api("Controller reports")
@@ -40,7 +41,7 @@ public class ReportController {
     }
     @ApiOperation(value = "Get Student report")
     @GetMapping("/student/{studentId}")
-    public List<StudentReportDTORecord> getStudentReport(@PathVariable Integer studentId) {
+    public List<StudentReportDTORecord> getStudentReport(@PathVariable BigInteger studentId) {
         return reportService.studentReport(studentId);
     }
 

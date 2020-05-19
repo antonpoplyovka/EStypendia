@@ -20,7 +20,6 @@ CREATE TABLE "student" (
 
 CREATE TABLE "address" (
 	"id" serial NOT NULL,
-	"student_id" integer NOT NULL,
 	"actual_address" BOOLEAN NOT NULL,
 	"code" varchar(10) NOT NULL,
 	"street" varchar(50) NOT NULL,
@@ -42,7 +41,7 @@ CREATE TABLE "payments_log" (
 	"id" serial NOT NULL,
 	"student_id" integer NOT NULL,
 	"payout_amount" integer NOT NULL,
-	"payment_date" TIMESTAMP NOT NULL,
+	"payment_date" Date NOT NULL,
 	CONSTRAINT "paymentsLog_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE

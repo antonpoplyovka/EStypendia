@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Api("Controller for address management")
@@ -29,7 +30,7 @@ public class PaymentsLogController {
 
     @ApiOperation(value = "Get all paymentsLog for student")
     @GetMapping("/student/{studentId}")
-    public List<PaymentsLog> getAllAddressesForStudent(@PathVariable Integer studentId) {
+    public List<PaymentsLog> getAllAddressesForStudent(@PathVariable BigInteger studentId) {
         return paymentsLogRepo.findAllByStudentId(studentId);
     }
 
