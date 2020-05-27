@@ -23,6 +23,7 @@ public class StudentService {
         if (student.isPresent()){
             student.get().setName(newStudent.getName());
             student.get().setSurname(newStudent.getSurname());
+            student.get().setEmail(newStudent.getEmail());
             student.get().setAddressType(newStudent.getAddressType());
             student.get().setCountryOfBirth(newStudent.getCountryOfBirth());
             student.get().setFatherName(newStudent.getFatherName());
