@@ -15,6 +15,8 @@ public class Student {
     private String surname;
     @Column(name = "father_name", nullable = false, length = 50)
     private String fatherName;
+    @Column(name = "email", nullable = false, length = 50)
+    private String email;
     @Column(name = "place_of_birth", nullable = false, length = 50)
     private String placeOfBirth;
     @Column(name = "country_of_birth", nullable = false, length = 50)
@@ -143,4 +145,11 @@ public class Student {
 //        this.actualAddress = actualAddress;
 //    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
