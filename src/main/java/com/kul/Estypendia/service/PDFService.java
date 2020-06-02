@@ -1,6 +1,9 @@
 package com.kul.Estypendia.service;
 
-import be.quodlibet.boxable.*;
+import be.quodlibet.boxable.BaseTable;
+import be.quodlibet.boxable.Cell;
+import be.quodlibet.boxable.Row;
+import be.quodlibet.boxable.VerticalAlignment;
 import be.quodlibet.boxable.line.LineStyle;
 import com.kul.Estypendia.controller.DTO.AdminReportDTORecord;
 import org.apache.pdfbox.pdmodel.PDDocument;

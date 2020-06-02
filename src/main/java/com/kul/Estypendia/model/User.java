@@ -1,20 +1,26 @@
 package com.kul.Estypendia.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="usr")
 public class User {
     @Id
+    @Column(name = "id", nullable = false)
     private String id;
+
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
+    @Column(name = "userpic", nullable = false)
     private String userpic;
+    @Column(name = "email", nullable = false, length = 50)
     private String email;
+    @Column(name = "role", nullable = false)
     private String role= "USER";
+    @Column(name = "locale", nullable = false)
     private String locale;
+    @Column(name = "lastVisit", nullable = false)
     private LocalDateTime lastVisit;
 
     public String getId() {
