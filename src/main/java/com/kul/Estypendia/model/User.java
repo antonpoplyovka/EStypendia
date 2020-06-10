@@ -4,16 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="usr")
-public class User {
+public class User   {
     @Id
     private String id;
     private String name;
     private String userpic;
     private String email;
-    private String role= "USER";
+    private String roles;
     private String locale;
     private LocalDateTime lastVisit;
 
@@ -65,11 +66,12 @@ public class User {
         this.lastVisit = lastVisit;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole(List<Roles> roles) {
+        this.roles = roles.toString();
     }
+
 }

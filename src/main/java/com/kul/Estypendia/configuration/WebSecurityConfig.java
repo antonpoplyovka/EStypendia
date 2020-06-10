@@ -1,6 +1,8 @@
 package com.kul.Estypendia.configuration;
 
+import com.kul.Estypendia.model.Roles;
 import com.kul.Estypendia.model.User;
+import com.kul.Estypendia.repository.AdminUsersRepo;
 import com.kul.Estypendia.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -17,13 +19,14 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Sso
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private Securityhandler securityHandler;
+    private AdminUsersRepo adminUsersRepo;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -52,15 +55,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PrincipalExtractor principalExtractor(UserRepo userRepo) {
+
         return map -> {
             String id = (String) map.get("sub");
             User user = userRepo.findById(id).orElseGet(() -> {
+
                 User newUser = new User();
                 newUser.setId(id);
                 newUser.setName((String) map.get("name"));
                 newUser.setEmail((String) map.get("email"));
                 newUser.setLocale((String) map.get("locale"));
                 newUser.setUserpic((String) map.get("userpic"));
+                if (adminUsersRepo.findByEmail(String.valueOf(map.get("email"))).isPresent()){
+                    newUser.setRole(Arrays.asList(Roles.ROLE_ADMIN,Roles.ROLE_USER));
+                }
+                else {
+                    newUser.setRole(Collections.singletonList(Roles.ROLE_USER));
+                }
                 return newUser;
             });
             user.setLastVisit(LocalDateTime.now());

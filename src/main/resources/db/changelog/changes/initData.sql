@@ -53,3 +53,6 @@ insert into payments_log (student_id, payout_amount, payment_date) VALUES
 (2,256,'2020-01-05');
 insert into payments_log (student_id, payout_amount, payment_date) VALUES
 (2,5000,'2020-02-03');
+
+INSERT into adminusers (email)
+values ('antonpoplyovka@gmail.com');

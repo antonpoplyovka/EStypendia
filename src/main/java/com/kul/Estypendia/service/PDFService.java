@@ -3,6 +3,7 @@ package com.kul.Estypendia.service;
 import be.quodlibet.boxable.*;
 import be.quodlibet.boxable.line.LineStyle;
 import com.kul.Estypendia.controller.DTO.AdminReportDTORecord;
+import com.kul.Estypendia.controller.DTO.StudentReportDTORecord;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Random;
 
@@ -41,7 +43,7 @@ public class PDFService {
         pdDocument.close();
     }
 
-    public void createPDFForAdminReport() throws IOException {
+    public String createPDFForAdminReport() throws IOException {
         List<AdminReportDTORecord> adminReport = reportService.adminReport();
 
         String outputFileName = generateFileName();
@@ -74,7 +76,7 @@ public class PDFService {
         cell.setValign(VerticalAlignment.MIDDLE);
         cell.setTopBorderStyle(new LineStyle(Color.BLACK, 10));
         table.addHeaderRow(headerRow);
-        for (AdminReportDTORecord record :adminReport) {
+        for (AdminReportDTORecord record : adminReport) {
             Row<PDPage> row = table.createRow(20);
             cell = row.createCell(30, record.getName());
             cell = row.createCell(40, record.getSurname());
@@ -84,7 +86,7 @@ public class PDFService {
         table.draw();
 
         float tableHeight = table.getHeaderAndDataHeight();
-        System.out.println("tableHeight = "+tableHeight);
+        System.out.println("tableHeight = " + tableHeight);
 
         // close the content stream
         cos.close();
@@ -92,8 +94,68 @@ public class PDFService {
         // Save the results and ensure that the document is properly closed:
         document.save(outputFileName);
         document.close();
+        return outputFileName;
     }
-    private String generateFileName(){
-        return new String("adminReport"+random.nextInt(100000));
+
+    public String createPDFForStudentReport(int studentId) throws IOException {
+        List<StudentReportDTORecord> studentReport = reportService.studentReport(BigInteger.valueOf(studentId));
+
+        String outputFileName = generateStudentFileName(studentId);
+
+        PDFont fontBold = PDType1Font.TIMES_ROMAN;
+
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage(PDRectangle.A4);
+        PDRectangle rect = page.getMediaBox();
+        document.addPage(page);
+
+        PDPageContentStream cos = new PDPageContentStream(document, page);
+
+        float margin = 50;
+        float yStartNewPage = page.getMediaBox().getHeight() - (2 * margin);
+        float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
+
+        boolean drawContent = true;
+        float yStart = yStartNewPage;
+        float bottomMargin = 70;
+        float yPosition = 800;
+
+        BaseTable table = new BaseTable(yPosition, yStartNewPage,
+                bottomMargin, tableWidth, margin, document, page, true, drawContent);
+
+        Row<PDPage> headerRow = table.createRow(50);
+        Cell<PDPage> cell = headerRow.createCell(100, "Historia wyplat");
+        cell.setFont(fontBold);
+        cell.setFontSize(20);
+        cell.setValign(VerticalAlignment.MIDDLE);
+        cell.setTopBorderStyle(new LineStyle(Color.BLACK, 10));
+        table.addHeaderRow(headerRow);
+        for (StudentReportDTORecord record : studentReport) {
+            Row<PDPage> row = table.createRow(20);
+            cell = row.createCell(50, record.getPaymentDate());
+            cell = row.createCell(50, record.getPaymentAmount().toString());
+        }
+
+        table.draw();
+
+        float tableHeight = table.getHeaderAndDataHeight();
+        System.out.println("tableHeight = " + tableHeight);
+
+        // close the content stream
+        cos.close();
+
+        // Save the results and ensure that the document is properly closed:
+        document.save(outputFileName);
+        document.close();
+        return outputFileName;
     }
+
+    private String generateFileName() {
+        return new String("adminReport" + random.nextInt(100000));
+    }
+
+    private String generateStudentFileName(int studentId) {
+        return new String("studentReport" + studentId + random.nextInt(100000));
+    }
+
 }

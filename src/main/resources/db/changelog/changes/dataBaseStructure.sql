@@ -70,4 +70,10 @@ CREATE TABLE "type_of_student" (
   OIDS=FALSE
 );
 
+CREATE TABLE "adminusers" (
+                           "id" serial NOT NULL,
+                           email varchar(255) NOT NULL
+) WITH (
+      OIDS=FALSE
+    );
 
